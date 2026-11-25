@@ -56,30 +56,72 @@ a{color:inherit;text-decoration:none}
 .nav a{font-weight:600;font-size:15px;color:var(--slate);transition:color .2s}
 .nav a:hover{color:var(--navy)}
 
-/* Фирменная кнопка со срезом */
+/* Фирменная кнопка со срезом: объём + свечение + бегущая волна.
+   Тень на внешнем элементе, срез на внутреннем <i> - иначе clip-path срезает тень. */
 .btn{
+  position:relative;
   display:inline-block;
   font-family:var(--font-body);font-weight:700;font-size:16px;
   padding:14px 30px;
-  background:var(--coral);color:var(--white);
-  clip-path:polygon(0 0,100% 0,calc(100% - var(--cut)) 100%,0 100%);
-  transition:background .2s,transform .2s;
+  color:var(--white);
+  background:transparent;
+  filter:drop-shadow(0 6px 0 #D6512F) drop-shadow(0 14px 20px rgba(255,107,74,.35));
+  transition:transform .15s,filter .2s;
   cursor:pointer;border:none;
 }
-.btn:hover{background:var(--navy);transform:translateY(-2px)}
-.btn-ghost{
-  background:var(--navy);color:var(--navy);
-  position:relative;
+.btn i{
+  position:absolute;inset:0;display:block;
+  clip-path:polygon(0 0,100% 0,calc(100% - var(--cut)) 100%,0 100%);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,0) 48%),
+    linear-gradient(180deg,#FF8266 0%,#FF6B4A 55%,#EF5232 100%);
 }
-.btn-ghost::before{
+.btn i::after{ /* бегущая волна-блик */
+  content:"";position:absolute;top:-20%;bottom:-20%;left:0;
+  width:44px;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:translateX(-90px) skewX(-18deg);
+  animation:btn-wave 3.8s ease-in-out infinite;
+}
+@keyframes btn-wave{
+  0%{transform:translateX(-90px) skewX(-18deg)}
+  40%{transform:translateX(420px) skewX(-18deg)}
+  100%{transform:translateX(420px) skewX(-18deg)}
+}
+.btn span{position:relative;z-index:1}
+.btn:hover{
+  transform:translateY(-3px);
+  filter:drop-shadow(0 9px 0 #D6512F) drop-shadow(0 18px 28px rgba(255,107,74,.5));
+}
+.btn:active{
+  transform:translateY(3px);
+  filter:drop-shadow(0 2px 0 #D6512F) drop-shadow(0 6px 12px rgba(255,107,74,.35));
+}
+.btn-ghost{
+  color:var(--navy);
+  filter:drop-shadow(0 6px 0 rgba(27,42,74,.28)) drop-shadow(0 12px 18px rgba(27,42,74,.14));
+}
+.btn-ghost i{background:var(--navy)}
+.btn-ghost i::before{
   content:"";position:absolute;inset:2px;
   background:var(--white);
   clip-path:polygon(0 0,100% 0,calc(100% - var(--cut) + 2px) 100%,0 100%);
   transition:background .2s;
 }
-.btn-ghost span{position:relative;z-index:1}
-.btn-ghost:hover{color:var(--white)}
-.btn-ghost:hover::before{background:var(--navy)}
+.btn-ghost i::after{ /* волна в тон: тёмная на светлом, светлая при наведении */
+  background:linear-gradient(105deg,transparent,rgba(27,42,74,.14),transparent);
+}
+.btn-ghost:hover{
+  color:var(--white);
+  filter:drop-shadow(0 9px 0 rgba(27,42,74,.28)) drop-shadow(0 16px 24px rgba(27,42,74,.2));
+}
+.btn-ghost:hover i::before{background:var(--navy)}
+.btn-ghost:hover i::after{
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.4),transparent);
+}
+.btn-ghost:active{
+  filter:drop-shadow(0 2px 0 rgba(27,42,74,.28)) drop-shadow(0 6px 10px rgba(27,42,74,.14));
+}
 .btn-small{padding:10px 22px;font-size:14px}
 
 /* ---------- Главный экран ---------- */
@@ -293,7 +335,7 @@ h2{
       <a href="#process">Как я работаю</a>
       <a href="#otzyvy">Отзывы</a>
       <a href="#about">Обо мне</a>
-      <a class="btn btn-small" href="#contact">Обсудить проект</a>
+      <a class="btn btn-small" href="#contact"><i></i><span>Обсудить проект</span></a>
     </nav>
   </div>
 </header>
@@ -305,8 +347,8 @@ h2{
       <h1>Сайты и&nbsp;ИИ-ассистенты, которые работают на&nbsp;ваш бизнес</h1>
       <p class="lead">Меня зовут Татьяна. Соберу под ключ сайт-визитку, лендинг или ИИ-помощника - от идеи до запуска. Вам не придётся разбираться в технических деталях: я всё сделаю сама и объясню простыми словами.</p>
       <div class="hero-actions">
-        <a class="btn" href="#contact">Обсудить проект</a>
-        <a class="btn btn-ghost" href="#uslugi"><span>Смотреть услуги</span></a>
+        <a class="btn" href="#contact"><i></i><span>Обсудить проект</span></a>
+        <a class="btn btn-ghost" href="#uslugi"><i></i><span>Смотреть услуги</span></a>
       </div>
     </div>
     <div class="hero-emblem-wrap">
@@ -469,8 +511,8 @@ h2{
     </div>
     <div class="contact-actions">
       <!-- ЗАГЛУШКИ: заменить на реальные контакты Татьяны -->
-      <a class="btn" href="https://t.me/tatevle_solution" target="_blank" rel="noopener">Написать в Telegram</a>
-      <a class="btn btn-ghost" href="mailto:hello@tatevle.ru"><span>hello@tatevle.ru</span></a>
+      <a class="btn" href="https://t.me/tatevle_solution" target="_blank" rel="noopener"><i></i><span>Написать в Telegram</span></a>
+      <a class="btn btn-ghost" href="mailto:hello@tatevle.ru"><i></i><span>hello@tatevle.ru</span></a>
     </div>
   </div>
 </section>

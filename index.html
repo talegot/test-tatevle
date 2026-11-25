@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ТатЕвЛе Solution - сайты и ИИ-ассистенты под ключ</title>
+<meta name="description" content="Татьяна, ТатЕвЛе Solution. Создаю сайты-визитки, лендинги и ИИ-ассистентов для малого бизнеса и экспертов. Дизайн, брендинг, поддержка.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B2A4A;
+  --coral:#FF6B4A;
+  --white:#FFFFFF;
+  --mist:#F4F6FA;
+  --slate:#5A6B8C;
+  --font-display:'Unbounded',sans-serif;
+  --font-body:'Manrope',sans-serif;
+  --cut:14px; /* фирменный диагональный срез */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--navy);
+  background:var(--white);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ---------- Шапка ---------- */
+.header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--mist);
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 0;gap:24px;
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-emblem{width:44px;height:auto}
+.logo-name{font-family:var(--font-display);font-weight:600;font-size:19px;line-height:1.1}
+.logo-name span{color:var(--coral)}
+.nav{display:flex;gap:28px;align-items:center}
+.nav a{font-weight:600;font-size:15px;color:var(--slate);transition:color .2s}
+.nav a:hover{color:var(--navy)}
+
+/* Фирменная кнопка со срезом */
+.btn{
+  display:inline-block;
+  font-family:var(--font-body);font-weight:700;font-size:16px;
+  padding:14px 30px;
+  background:var(--coral);color:var(--white);
+  clip-path:polygon(0 0,100% 0,calc(100% - var(--cut)) 100%,0 100%);
+  transition:background .2s,transform .2s;
+  cursor:pointer;border:none;
+}
+.btn:hover{background:var(--navy);transform:translateY(-2px)}
+.btn-ghost{
+  background:var(--navy);color:var(--navy);
+  position:relative;
+}
+.btn-ghost::before{
+  content:"";position:absolute;inset:2px;
+  background:var(--white);
+  clip-path:polygon(0 0,100% 0,calc(100% - var(--cut) + 2px) 100%,0 100%);
+  transition:background .2s;
+}
+.btn-ghost span{position:relative;z-index:1}
+.btn-ghost:hover{color:var(--white)}
+.btn-ghost:hover::before{background:var(--navy)}
+.btn-small{padding:10px 22px;font-size:14px}
+
+/* ---------- Главный экран ---------- */
+.hero{position:relative;overflow:hidden}
+.hero-inner{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  align-items:center;gap:48px;
+  padding:96px 0 120px;
+}
+.hero h1{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:clamp(30px,4.4vw,52px);
+  line-height:1.16;
+  letter-spacing:-.01em;
+}
+.hero p.lead{
+  margin-top:24px;
+  font-size:19px;
+  color:var(--slate);
+  max-width:46ch;
+}
+.hero-actions{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap}
+.hero-emblem{width:100%;max-width:400px;justify-self:end}
+
+/* Единственный «громкий» жест страницы: коралловая плоскость за эмблемой */
+.hero-emblem-wrap{position:relative;justify-self:end}
+.hero-emblem-wrap::before{
+  content:"";position:absolute;inset:-8% -18% -8% -6%;
+  background:var(--mist);
+  clip-path:polygon(12% 0,100% 0,88% 100%,0 100%);
+  z-index:-1;
+}
+.hero-emblem{width:min(400px,80vw)}
+
+/* Появление при загрузке - один раз, только главный экран */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero h1,.hero p.lead,.hero-actions,.hero-emblem-wrap{animation:rise .7s ease-out both}
+.hero p.lead{animation-delay:.1s}
+.hero-actions{animation-delay:.2s}
+.hero-emblem-wrap{animation-delay:.15s}
+
+/* ---------- Секции ---------- */
+.section{padding:96px 0}
+.section-mist{
+  background:var(--mist);
+  clip-path:polygon(0 44px,100% 0,100% 100%,0 100%);
+  padding-top:140px;
+}
+.section-navy{background:var(--navy);color:var(--white)}
+h2{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(24px,3vw,36px);
+  line-height:1.25;
+  margin-bottom:16px;
+}
+.section-sub{color:var(--slate);max-width:56ch;margin-bottom:56px}
+.section-navy .section-sub{color:#B9C3D9}
+
+/* ---------- Услуги ---------- */
+.services{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0 56px;
+}
+.service{
+  padding:36px 0 40px;
+  border-top:2px solid var(--navy);
+  position:relative;
+}
+.service::before{ /* фирменный срез-маркер */
+  content:"";position:absolute;top:-2px;left:0;
+  width:64px;height:6px;background:var(--coral);
+  clip-path:polygon(0 0,100% 0,calc(100% - 6px) 100%,0 100%);
+}
+.service h3{
+  font-family:var(--font-display);
+  font-weight:600;font-size:20px;
+  margin:18px 0 10px;
+}
+.service p{color:var(--slate);max-width:44ch}
+.service-icon{width:44px;height:44px;color:var(--navy)}
+
+/* ---------- Процесс ---------- */
+.process{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:32px;counter-reset:step;
+}
+.step{border-top:2px solid var(--navy);padding-top:24px}
+.step::before{
+  counter-increment:step;
+  content:counter(step,decimal-leading-zero);
+  font-family:var(--font-display);
+  font-weight:800;font-size:34px;
+  color:var(--coral);
+  display:block;margin-bottom:14px;
+}
+.step h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.step p{color:var(--slate);font-size:15.5px}
+
+/* ---------- Обо мне ---------- */
+.about-inner{
+  display:grid;grid-template-columns:auto 1fr;
+  gap:64px;align-items:center;
+}
+.about-emblem{width:180px;flex-shrink:0}
+.about-text p{max-width:58ch;margin-bottom:18px;color:#DCE2EF}
+.about-text p:first-of-type{color:var(--white);font-size:19px}
+
+/* ---------- Контакты ---------- */
+.contact{text-align:left;position:relative;overflow:hidden}
+.contact-inner{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;
+}
+.contact-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:32px}
+.contact .big{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(22px,2.6vw,30px);
+  line-height:1.35;
+}
+.contact-note{color:var(--slate);margin-top:14px}
+
+/* ---------- Подвал ---------- */
+.footer{background:var(--navy);color:#B9C3D9;padding:36px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer .logo-name{color:var(--white);font-size:16px}
+.footer small{font-size:14px}
+
+/* ---------- Кейсы ---------- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.case{
+  background:var(--mist);
+  padding:30px 26px 34px;
+  clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,0 100%);
+}
+.case-tag{
+  display:inline-block;
+  font-weight:700;font-size:14px;color:var(--coral);
+  margin-bottom:14px;
+}
+.case h3{
+  font-family:var(--font-display);
+  font-weight:600;font-size:19px;line-height:1.35;
+  margin-bottom:12px;
+}
+.case p{color:var(--slate);font-size:15.5px;margin-bottom:14px}
+.case-result{
+  color:var(--navy);font-weight:700;font-size:15.5px;
+  border-top:2px solid var(--coral);
+  padding-top:14px;margin-top:4px;
+}
+
+/* ---------- Отзывы ---------- */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.review{border-top:2px solid var(--navy);padding-top:20px}
+.review::before{
+  content:"«";
+  font-family:var(--font-display);
+  font-weight:800;font-size:46px;line-height:.8;
+  color:var(--coral);
+  display:block;margin-bottom:14px;
+}
+.review p{font-size:16.5px;margin-bottom:18px}
+.review-author{font-weight:700}
+.review-author small{display:block;color:var(--slate);font-weight:500;font-size:14px}
+
+/* ---------- Адаптив ---------- */
+@media (max-width:860px){
+  .nav a{display:none}
+  .hero-inner{grid-template-columns:1fr;padding:64px 0 88px;gap:40px}
+  .hero-emblem-wrap{justify-self:start;order:-1}
+  .hero-emblem{width:min(240px,60vw)}
+  .services{grid-template-columns:1fr}
+  .cases{grid-template-columns:1fr}
+  .reviews{grid-template-columns:1fr}
+  .process{grid-template-columns:1fr 1fr}
+  .about-inner{grid-template-columns:1fr;gap:32px}
+  .contact-inner{grid-template-columns:1fr}
+  .section{padding:72px 0}
+  .section-mist{padding-top:110px}
+}
+@media (max-width:520px){
+  .process{grid-template-columns:1fr}
+}
+
+/* Уважение к настройкам пользователя */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- Шапка -->
+<header class="header">
+  <div class="wrap header-inner">
+    <a class="logo" href="#top" aria-label="ТатЕвЛе Solution - на главную">
+      <svg class="logo-emblem" viewBox="0 0 205 145" role="img" aria-hidden="true">
+        <path fill="#1B2A4A" d="M20 20 H185 L165 45 H20 Z"/>
+        <path fill="#1B2A4A" d="M55 45 H85 V100 L55 125 Z"/>
+        <path fill="#FF6B4A" d="M115 60 H190 L170 85 H95 Z"/>
+        <path fill="#1B2A4A" d="M115 100 H190 L170 125 H95 Z"/>
+      </svg>
+      <span class="logo-name">ТатЕвЛе <span>Solution</span></span>
+    </a>
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#uslugi">Услуги</a>
+      <a href="#kejsy">Кейсы</a>
+      <a href="#process">Как я работаю</a>
+      <a href="#otzyvy">Отзывы</a>
+      <a href="#about">Обо мне</a>
+      <a class="btn btn-small" href="#contact">Обсудить проект</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Главный экран -->
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div>
+      <h1>Сайты и&nbsp;ИИ-ассистенты, которые работают на&nbsp;ваш бизнес</h1>
+      <p class="lead">Меня зовут Татьяна. Соберу под ключ сайт-визитку, лендинг или ИИ-помощника - от идеи до запуска. Вам не придётся разбираться в технических деталях: я всё сделаю сама и объясню простыми словами.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Обсудить проект</a>
+        <a class="btn btn-ghost" href="#uslugi"><span>Смотреть услуги</span></a>
+      </div>
+    </div>
+    <div class="hero-emblem-wrap">
+      <svg class="hero-emblem" viewBox="0 0 205 145" role="img" aria-label="Эмблема ТатЕвЛе Solution">
+        <path fill="#1B2A4A" d="M20 20 H185 L165 45 H20 Z"/>
+        <path fill="#1B2A4A" d="M55 45 H85 V100 L55 125 Z"/>
+        <path fill="#FF6B4A" d="M115 60 H190 L170 85 H95 Z"/>
+        <path fill="#1B2A4A" d="M115 100 H190 L170 125 H95 Z"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Услуги -->
+<section class="section section-mist" id="uslugi">
+  <div class="wrap">
+    <h2>Что я делаю</h2>
+    <p class="section-sub">Четыре направления - можно начать с одного и постепенно добавлять остальные.</p>
+    <div class="services">
+      <article class="service">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+          <path d="M6 10 H38 L34 30 H10 Z"/>
+          <path d="M16 36 H32" stroke="#FF6B4A"/>
+        </svg>
+        <h3>Сайты под ключ</h3>
+        <p>Визитки, лендинги и портфолио. От структуры и текстов до публикации в интернете - вы получаете готовый работающий сайт.</p>
+      </article>
+      <article class="service">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+          <path d="M8 8 H36 L32 28 H14 L8 36 V8 Z"/>
+          <path d="M18 18 H30" stroke="#FF6B4A"/>
+        </svg>
+        <h3>ИИ-ассистенты</h3>
+        <p>Помощники, которые отвечают клиентам, разбирают почту и берут рутину на себя - работают за вас круглосуточно.</p>
+      </article>
+      <article class="service">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+          <path d="M10 34 L26 8 H36 L20 34 H10 Z"/>
+          <path d="M24 34 H36" stroke="#FF6B4A"/>
+        </svg>
+        <h3>Дизайн и брендинг</h3>
+        <p>Логотип, фирменные цвета и стиль, чтобы бизнес выглядел цельно, профессионально и запоминался клиентам.</p>
+      </article>
+      <article class="service">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+          <path d="M8 22 A14 14 0 0 1 36 18"/>
+          <path d="M36 8 V18 H26" stroke="#FF6B4A"/>
+          <path d="M36 22 A14 14 0 0 1 8 26"/>
+        </svg>
+        <h3>Ведение и поддержка</h3>
+        <p>Обновлю информацию, поправлю детали, слежу, чтобы сайт работал без сбоев. Вы занимаетесь делом - я слежу за сайтом.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Кейсы -->
+<!-- ДЕМО-КЕЙСЫ: примеры вымышленные, заменить на реальные проекты Татьяны -->
+<section class="section" id="kejsy">
+  <div class="wrap">
+    <h2>Примеры работ</h2>
+    <p class="section-sub">Как задачи клиентов превращаются в готовые решения.</p>
+    <div class="cases">
+      <article class="case">
+        <span class="case-tag">Сайт-визитка</span>
+        <h3>Сайт для частного кондитера</h3>
+        <p>Задача: показать работы и собирать заказы без переписки в мессенджерах. Сделала визитку с портфолио, ценами и формой заказа.</p>
+        <p class="case-result">Первые заказы через сайт - уже в первый месяц</p>
+      </article>
+      <article class="case">
+        <span class="case-tag">Лендинг</span>
+        <h3>Страница для фитнес-тренера</h3>
+        <p>Задача: наполнить группу на новый курс. Сделала продающую страницу с программой, ценами и кнопкой записи.</p>
+        <p class="case-result">Группа набрана за две недели до старта</p>
+      </article>
+      <article class="case">
+        <span class="case-tag">ИИ-ассистент</span>
+        <h3>Помощник для салона красоты</h3>
+        <p>Задача: перестать терять клиентов вечером и в выходные. Настроила ассистента, который отвечает на вопросы и записывает круглосуточно.</p>
+        <p class="case-result">Заявки принимаются даже ночью, администратор разгружен</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Процесс -->
+<section class="section" id="process">
+  <div class="wrap">
+    <h2>Как я работаю</h2>
+    <p class="section-sub">Понятный процесс без сюрпризов: вы всегда знаете, на каком этапе ваш проект.</p>
+    <div class="process">
+      <div class="step">
+        <h3>Знакомимся</h3>
+        <p>Обсуждаем задачу, цели и сроки. Это бесплатно и ни к чему не обязывает.</p>
+      </div>
+      <div class="step">
+        <h3>Показываю варианты</h3>
+        <p>Предлагаю структуру и дизайн-концепцию до начала основной работы.</p>
+      </div>
+      <div class="step">
+        <h3>Собираю и запускаю</h3>
+        <p>Вы вносите правки, я довожу проект до публикации в интернете.</p>
+      </div>
+      <div class="step">
+        <h3>Остаюсь на связи</h3>
+        <p>Поддерживаю сайт и помогаю развивать его дальше, если нужно.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Отзывы -->
+<!-- ДЕМО-ОТЗЫВЫ: вымышленные, заменить на реальные только с письменного согласия клиентов (152-ФЗ) -->
+<section class="section section-mist" id="otzyvy">
+  <div class="wrap">
+    <h2>Что говорят клиенты</h2>
+    <p class="section-sub">Несколько слов от тех, кто уже работал со мной.</p>
+    <div class="reviews">
+      <blockquote class="review">
+        <p>Всё объяснила простыми словами, сделала быстро и красиво. Клиенты пишут, что на сайте всё понятно - а для меня это главное.</p>
+        <footer class="review-author">Марина<small>кондитер</small></footer>
+      </blockquote>
+      <blockquote class="review">
+        <p>Ассистент отвечает клиентам ночью, пока я сплю. Записей стало больше, а я наконец разгрузилась.</p>
+        <footer class="review-author">Ольга<small>владелица салона красоты</small></footer>
+      </blockquote>
+      <blockquote class="review">
+        <p>Боялась, что не разберусь с сайтом сама. Татьяна всё настроила, показала и осталась на связи. Очень спокойно и по-человечески.</p>
+        <footer class="review-author">Светлана<small>репетитор</small></footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- Обо мне -->
+<section class="section section-navy" id="about">
+  <div class="wrap about-inner">
+    <svg class="about-emblem" viewBox="0 0 205 145" role="img" aria-label="Эмблема ТатЕвЛе Solution">
+      <path fill="#FFFFFF" d="M20 20 H185 L165 45 H20 Z"/>
+      <path fill="#FFFFFF" d="M55 45 H85 V100 L55 125 Z"/>
+      <path fill="#FF6B4A" d="M115 60 H190 L170 85 H95 Z"/>
+      <path fill="#FFFFFF" d="M115 100 H190 L170 125 H95 Z"/>
+    </svg>
+    <div class="about-text">
+      <h2>Обо мне</h2>
+      <p>Я Татьяна, основатель студии ТатЕвЛе Solution. Создаю сайты и ИИ-ассистентов для малого бизнеса и экспертов.</p>
+      <p>Я сама прошла путь от «не разбираюсь в технологиях» до создания сайтов и ИИ-помощников, поэтому отлично понимаю своих клиентов. Говорю на простом языке, объясняю каждый шаг и довожу проект до результата - а не до «ну вот, что-то получилось».</p>
+      <p>Для меня каждый проект - это чьё-то дело и чья-то мечта. Отношусь к ним соответственно.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Контакты -->
+<section class="section contact" id="contact">
+  <div class="wrap contact-inner">
+    <div>
+      <h2>Расскажите о вашей задаче</h2>
+      <p class="big">Напишите мне - обсудим, что нужно именно вам, и я предложу решение под вашу задачу и бюджет.</p>
+      <p class="contact-note">Отвечаю в течение дня. Первая консультация - бесплатно.</p>
+    </div>
+    <div class="contact-actions">
+      <!-- ЗАГЛУШКИ: заменить на реальные контакты Татьяны -->
+      <a class="btn" href="https://t.me/tatevle_solution" target="_blank" rel="noopener">Написать в Telegram</a>
+      <a class="btn btn-ghost" href="mailto:hello@tatevle.ru"><span>hello@tatevle.ru</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Подвал -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <a class="logo" href="#top" aria-label="ТатЕвЛе Solution - наверх">
+      <svg class="logo-emblem" viewBox="0 0 205 145" role="img" aria-hidden="true" style="width:34px">
+        <path fill="#FFFFFF" d="M20 20 H185 L165 45 H20 Z"/>
+        <path fill="#FFFFFF" d="M55 45 H85 V100 L55 125 Z"/>
+        <path fill="#FF6B4A" d="M115 60 H190 L170 85 H95 Z"/>
+        <path fill="#FFFFFF" d="M115 100 H190 L170 125 H95 Z"/>
+      </svg>
+      <span class="logo-name">ТатЕвЛе <span>Solution</span></span>
+    </a>
+    <small>© 2026 ТатЕвЛе Solution. Сделано с любовью к деталям.</small>
+  </div>
+</footer>
+
+</body>
+</html>
